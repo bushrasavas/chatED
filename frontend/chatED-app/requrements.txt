@@ -1,0 +1,7 @@
+npm install @react-navigation/native
+npx expo install react-native-screens react-native-safe-area-context
+npm install @react-navigation/native-stack
+npx expo install @react-native-async-storage/async-storage
+npm install react-native-uuid
+npm install react-native-root-toast
+npm install react-native-toast-message
