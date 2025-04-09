@@ -84,7 +84,6 @@ const RegisterScreen = ({ navigation }) => {
         secureTextEntry
       />
 
-      {/* TouchableOpacity ile Buton */}
       {loading ? (
         <ActivityIndicator size="small" color="#43b7bf" />
       ) : (
@@ -132,7 +131,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   button: {
-    backgroundColor: '#43b7bf', // Buton rengini burada ayarlıyoruz
+    backgroundColor: '#43b7bf',
     padding: 12,
     borderRadius: 8,
     alignItems: 'center',

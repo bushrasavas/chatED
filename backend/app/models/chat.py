@@ -4,20 +4,15 @@ from app.extensions import db
 
 class ChatMessage(db.Model):
     __tablename__ = 'chat_messages'
-    
     # Unique identifier for each message
     id = db.Column(db.String, primary_key=True, default=lambda: str(uuid.uuid4()))
     
-    # User related info
     user_id = db.Column(db.String, nullable=True)
     
-    # User message text
     user_message = db.Column(db.Text, nullable=False)
     
-    # Bot's response to the message
     bot_response = db.Column(db.Text, nullable=False)
     
-    # Timestamp of the message
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     
     # Unique session ID to group messages in the same session

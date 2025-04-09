@@ -1,7 +1,6 @@
 #pip install -r requirements.txt uploads everything below
 #pip freeze > requirements.txt
 
-
 pip install transformers torch flask
 pip install flask-cors
 pip install datasets

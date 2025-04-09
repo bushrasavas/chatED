@@ -13,7 +13,6 @@ def get_history():
     # fetch all text according to timestamp
     chats = ChatMessage.query.filter_by(user_id=user_id).order_by(ChatMessage.timestamp.asc()).all()
 
-    # classify according to sessions
     sessions = defaultdict(list)
     for chat in chats:
         sessions[chat.session_id].append({
@@ -22,7 +21,6 @@ def get_history():
             'timestamp': chat.timestamp.isoformat()
         })
 
-    # JSON friendly
     grouped_history = []
     for session_id, messages in sessions.items():
         grouped_history.append({

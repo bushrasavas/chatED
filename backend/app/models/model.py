@@ -4,19 +4,15 @@ import torch
 
 TOKEN = os.getenv("HUGGINGFACE_TOKEN")
 
-#ED prediction-roBERTa model
 ED_MODEL_NAME = "busras/roBERTa_ED_Detection_3.3"
 
 ed_tokenizer = AutoTokenizer.from_pretrained(ED_MODEL_NAME, use_auth_token=TOKEN)
 ed_model = AutoModelForSequenceClassification.from_pretrained(ED_MODEL_NAME, use_auth_token=TOKEN)
-
 print("Model is downloaded!")
 
-# Chatbot Model (chatED-DialoGPT)
-CHATBOT_MODEL_NAME = "busras/chatED-dialo-v5"
+CHATBOT_MODEL_NAME = "busras/chatED-dialo"
 chatbot_tokenizer = AutoTokenizer.from_pretrained(CHATBOT_MODEL_NAME, use_auth_token=TOKEN)
 chatbot_model = AutoModelForCausalLM.from_pretrained(CHATBOT_MODEL_NAME, use_auth_token=TOKEN)
-
 print("Fine-tuned DialoGPT Model is downloaded!")
 
 def predict(text):
@@ -29,15 +25,12 @@ def predict(text):
 chat_history = []
 def chatbot_respond(user_message):
     global chat_history
-
-    # Tokenize input message
     inputs = chatbot_tokenizer(user_message + chatbot_tokenizer.eos_token, return_tensors="pt", padding="max_length", truncation=True, max_length=512)
     input_ids = inputs['input_ids']
     attention_mask = inputs['attention_mask']
     print(f"Input IDs: {input_ids.shape}")
     print(f"Attention Mask: {attention_mask.shape}")
 
-    # Add current input to chat history
     chat_history.append(input_ids)
 
     # Combine chat history

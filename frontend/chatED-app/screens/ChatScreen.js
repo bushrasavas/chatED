@@ -26,7 +26,7 @@ const ChatScreen = () => {
     console.log("Sending to /chatbot with session:", sessionIdRef.current);
 
     // Add user's message to chat history
-    const messageId = uuid.v4();  // Creating unique ID for each message
+    const messageId = uuid.v4();
     setChatMessages((prevMessages) => [
       ...prevMessages,
       { id: messageId, sender: 'user', text: chatText },
