@@ -1,18 +1,22 @@
+"""This module initializes the Flask application and registers blueprints."""
+
+import os
 from flask import Flask
 from flask_cors import CORS
 from dotenv import load_dotenv
-import os
+from flask_jwt_extended import JWTManager
+from flask_migrate import Migrate
 from app.routes.auth import auth_bp
 from app.routes.chatbot import chatbot_bp
 from app.routes.predict import predict_bp
 from app.routes.history import history_bp
 from app.extensions import db
-from flask_jwt_extended import JWTManager
-from flask_migrate import Migrate
 
 jwt = JWTManager()  # JWT manager instance
 
 def create_app():
+    """Create and configure the Flask application."""
+    
     load_dotenv()
 
     app = Flask(__name__)

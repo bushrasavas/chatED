@@ -70,3 +70,4 @@ def login():
         return jsonify({'token': token}), 200
     else:
         return jsonify({'error': 'Invalid credentials'}), 401
+    

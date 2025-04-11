@@ -19,15 +19,14 @@ const HomeScreen = ({ navigation }) => {
       });
 
       const result = await response.json();
-      const scores = result.prediction?.[0] || [];
-      const maxIndex = scores.indexOf(Math.max(...scores));
-
-      if (maxIndex === 1) {
+      
+      if (result.label === "ED") {
         setTweetResult('Risk is detected!');
         navigation.navigate('Chat');
       } else {
         setTweetResult('This tweet seems safe.');
       }
+      
     } catch (error) {
       console.error(error);
       setTweetResult('Error analyzing tweet.');

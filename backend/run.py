@@ -1,7 +1,9 @@
-from dotenv import load_dotenv
-load_dotenv()
+"""Entry point for running the ChatED Flask application."""
 
+from dotenv import load_dotenv
 from app import create_app, db
+
+load_dotenv()
 
 app = create_app()
 

@@ -12,4 +12,10 @@ def classify_tweet():
         return jsonify({"error": "No text provided"}), 400
 
     prediction = predict(text)
-    return jsonify({"prediction": prediction})
+    score = prediction [0][1]
+    label = "ED" if score > 0.5 else "Non-ED"
+
+    return jsonify({
+        "label": label,
+        "confidence": round(score,3)
+    })

@@ -7,6 +7,7 @@ from app.extensions import db
 from flask_jwt_extended import verify_jwt_in_request, jwt_required, get_jwt_identity
 from app.models.model import chatbot_tokenizer, chatbot_model
 import torch
+import time
 
 chatbot_bp = Blueprint('chatbot', __name__)
 
@@ -30,6 +31,13 @@ danger_phrases = [
     "guilt is deserved", "eating disorders can be very easy to fight", "exercise to lose weight",
     "you should be stronger than food", "eating is a privilege"
 ]
+
+def measure_response_time(prompt, chatbot_function):
+    start_time = time.time()
+    bot_reply = chatbot_function(prompt)
+    end_time = time.time()
+    response_time = end_time - start_time
+    return bot_reply, response_time
 
 def trim_repetitive_sentence_starts(response, max_repeats=2):
     sentence_starts = {}
@@ -119,7 +127,7 @@ def chatbot():
     if not user_message.strip():
         return jsonify({"error": "No message received"}), 400
 
-    bot_reply = chatED_reply(user_message)
+    bot_reply, response_time = measure_response_time(user_message, chatED_reply)
 
     if user_id:
         chat_entry = ChatMessage(
@@ -131,7 +139,7 @@ def chatbot():
         db.session.add(chat_entry)
         db.session.commit()
 
-    return jsonify({"response": bot_reply})
+    return jsonify({"response": bot_reply, "response_time": response_time})
 
 @chatbot_bp.route('/history', methods=['POST'])
 @jwt_required()

@@ -1,4 +1,6 @@
-import React, { useState, useEffect} from 'react';
+/* global __DEV__ */
+import PropTypes from 'prop-types';
+import React, { useState} from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Toast from 'react-native-toast-message';
@@ -131,3 +133,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
+
+LoginScreen.propTypes = {
+  navigation: PropTypes.object.isRequired
+};

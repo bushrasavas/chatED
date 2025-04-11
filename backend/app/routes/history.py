@@ -15,7 +15,7 @@ def get_history():
 
     sessions = defaultdict(list)
     for chat in chats:
-        sessions[chat.session_id].append({
+        sessions[chat.chat_session_id].append({
             'user_message': chat.user_message,
             'bot_response': chat.bot_response,
             'timestamp': chat.timestamp.isoformat()
